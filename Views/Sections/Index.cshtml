@@ -1,0 +1,68 @@
+﻿@model IEnumerable<StudentWebsite.Models.Section>
+
+@{
+    ViewData["Title"] = "Sections";
+}
+
+<h1>Sections</h1>
+
+<table class="table table-hover">
+    <thead class="table-secondary">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.CourseCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.Name)
+            </th>
+            <th>
+                Spots Remaining
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Professor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Name)
+                </td>
+                <td>
+                    @{
+                        int rem = item.TotalSpots;
+                        if (item.Registrations != null)
+                        {
+                            rem = item.TotalSpots - item.Registrations.Count();
+                        }
+                    }
+                    @rem
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Professor)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-success">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-primary">Details</a> 
+                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>

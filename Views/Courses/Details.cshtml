@@ -1,0 +1,53 @@
+﻿@model StudentWebsite.Models.Course
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4>Course Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CourseCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CourseCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sections)
+        </dt>
+        @if (Model.Sections != null)
+        {
+            foreach (var item in Model.Sections)
+            {
+                <dd class="col-sm-10">
+                    <a asp-controller="Sections" asp-action="Details" asp-route-id="@item.ID">
+                        Section ID @item.ID -
+                        @item.Course.CourseCode -
+                        @item.Professor
+                    </a>
+                </dd>
+                <dt class="col-sm-2">
+
+                </dt>
+            }
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ID" class="btn btn-success">Edit</a>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

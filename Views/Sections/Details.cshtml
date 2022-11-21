@@ -1,0 +1,75 @@
+﻿@model StudentWebsite.Models.Section
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div>
+    <h4>Section Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CourseID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CourseID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Course.CourseCode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Course.CourseCode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Course.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Course.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Professor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Professor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalSpots)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalSpots)
+        </dd>
+        <dt class = "col-sm-2">
+            Remaining Spots
+        </dt>
+        <dd class = "col-sm-10">
+            @{
+                int rem = Model.TotalSpots;
+                if (Model.Registrations != null)
+                {
+                    rem = Model.TotalSpots - Model.Registrations.Count();
+                }
+            }
+            @rem
+        </dd>
+        <dt class="col-sm-2">
+            Students Registered
+        </dt>
+        @{
+            if(Model.Registrations != null)
+            {
+                foreach(var item in Model.Registrations)
+                {
+                    <dd class="col-sm-10">
+                    <a asp-controller="Students" asp-action="Details" asp-route-id="@item.StudentID">
+                        @item.Student.FullName
+                    </a>
+                    </dd>
+                    <dt class="col-sm-2"></dt>
+                }
+            }
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ID" class="btn btn-success">Edit</a>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

@@ -1,0 +1,39 @@
+﻿@model StudentWebsite.Models.Section
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<h4>Edit Section</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="CourseID" class="control-label"></label>
+                <input asp-for="CourseID" class="form-control" />
+                <span asp-validation-for="CourseID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalSpots" class="control-label"></label>
+                <input asp-for="TotalSpots" class="form-control" />
+                <span asp-validation-for="TotalSpots" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Professor" class="control-label"></label>
+                <input asp-for="Professor" class="form-control" />
+                <span asp-validation-for="Professor" class="text-danger"></span>
+            </div>
+            <div class="form-group pt-2">
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                <input type="submit" value="Save" class="btn btn-success float-end" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
